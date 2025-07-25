@@ -12,3 +12,9 @@ model Usuario {
   nombre String
   email  String @unique
 }
+
+model Carros {
+  id            Int    @id @default(autoincrement())
+  marca         String
+  NumeroPlacas  String @unique
+}
