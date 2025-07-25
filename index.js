@@ -13,11 +13,15 @@ app.get('/usuarios', async (req, res) => {
 
 // POST /usuarios
 app.post('/usuarios', async (req, res) => {
-  const { nombre, email } = req.body;
-  const nuevo = await prisma.usuario.create({
-    data: { nombre, email },
-  });
-  res.json(nuevo);
+  try {
+    const { nombre, email } = req.body;
+    const nuevo = await prisma.usuario.create({
+      data: { nombre, email },
+    });
+    res.json(nuevo);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear usuario', detalle: error.message });
+  }
 });
 
 // PUT /usuarios/:id
